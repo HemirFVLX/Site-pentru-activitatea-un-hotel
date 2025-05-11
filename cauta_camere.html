@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style1.css">
+  <title>Hotelul Steaua Mica</title>
+</head>
+<body>
+  <h1>Cauta camere disponibile</h1>
+  <form action="camere_disponibile.php" method="POST">
+    <h3>Data check-in:</h3>
+    <label for="month1">Luna:</label>
+    <select id="month1" name="month1" onchange="updateDays1()">
+      <option value="1">ianuarie</option>
+      <option value="2">februarie</option>
+      <option value="3">martie</option>
+      <option value="4">aprilie</option>
+      <option value="5">mai</option>
+      <option value="6">iunie</option>
+      <option value="7">iulie</option>
+      <option value="8">august</option>
+      <option value="9">septembrie</option>
+      <option value="10">octombrie</option>
+      <option value="11">noiembrie</option>
+      <option value="12">decembrie</option>
+    </select>
+
+    <label for="day1">Ziua:</label>
+    <select id="day1" name="day1"></select>
+    
+    <h3>Data check-out:</h3>
+    <label for="month2">Luna:</label>
+    <select id="month2" name="month2" onchange="updateDays2()">
+      <option value="1">ianuarie</option>
+      <option value="2">februarie</option>
+      <option value="3">martie</option>
+      <option value="4">aprilie</option>
+      <option value="5">mai</option>
+      <option value="6">iunie</option>
+      <option value="7">iulie</option>
+      <option value="8">august</option>
+      <option value="9">septembrie</option>
+      <option value="10">octombrie</option>
+      <option value="11">noiembrie</option>
+      <option value="12">decembrie</option>
+    </select>
+
+    <label for="day2">Ziua:</label>
+    <select id="day2" name="day2"></select>
+
+    <input type="hidden" name="year" id="year" value="">
+
+    <br><br>
+    <button type="submit">Cauta</button>
+  </form>
+
+  <script>
+    const daySelect1 = document.getElementById("day1");
+    const monthSelect1 = document.getElementById("month1");
+    const daySelect2 = document.getElementById("day2");
+    const monthSelect2 = document.getElementById("month2");
+
+    const yearInput = document.getElementById("year");
+
+    const currentYear = new Date().getFullYear();
+    yearInput.value = currentYear;
+
+    function updateDays1() {
+      const month1 = parseInt(monthSelect1.value);
+      const daysInMonth1 = new Date(currentYear, month1, 0).getDate();
+
+      daySelect1.innerHTML = "";
+      for (let i = 1; i <= daysInMonth1; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = i;
+        daySelect1.appendChild(option);
+      }
+    }
+
+    function updateDays2() {
+      const month2 = parseInt(monthSelect2.value);
+      const daysInMonth2 = new Date(currentYear, month2, 0).getDate();
+
+      daySelect2.innerHTML = "";
+      for (let i = 1; i <= daysInMonth2; i++) {
+        const option = document.createElement("option");
+        option.value = i;
+        option.textContent = i;
+        daySelect2.appendChild(option);
+      }
+    }
+
+    window.onload = function() {
+      updateDays1();
+      updateDays2();
+    };
+  </script>
+</body>
+</html>
